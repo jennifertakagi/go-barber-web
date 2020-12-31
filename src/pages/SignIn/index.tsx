@@ -9,7 +9,7 @@ import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, Background } from './styles';
@@ -20,7 +20,7 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-  const { user, signIn } = useAuth();
+  const { signIn } = useAuth();
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(

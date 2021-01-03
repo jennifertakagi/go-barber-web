@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -11,7 +12,7 @@ import Button from '../../components/Button';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import { Container, Content, Background } from './styles';
+import { AnimationContainer, Background, Container, Content } from './styles';
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -46,27 +47,29 @@ const SignUp: React.FC = () => {
       <Background />
 
       <Content>
-        <img src={logoImg} alt="GoBarber" />
+        <AnimationContainer>
+          <img src={logoImg} alt="GoBarber" />
 
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Register</h1>
-          <Input icon={FiUser} name="name" placeholder="Name" type="text" />
-          <Input icon={FiMail} name="email" placeholder="Email" type="text" />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1>Register</h1>
+            <Input icon={FiUser} name="name" placeholder="Name" type="text" />
+            <Input icon={FiMail} name="email" placeholder="Email" type="text" />
 
-          <Input
-            icon={FiLock}
-            name="password"
-            placeholder="Password"
-            type="password"
-          />
+            <Input
+              icon={FiLock}
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
 
-          <Button type="submit">Register</Button>
-        </Form>
+            <Button type="submit">Register</Button>
+          </Form>
 
-        <a href="login">
-          <FiArrowLeft />
+          <Link to="/">
+            <FiArrowLeft />
           Go back to logon
-        </a>
+        </Link>
+        </AnimationContainer>
       </Content>
     </Container>
   );

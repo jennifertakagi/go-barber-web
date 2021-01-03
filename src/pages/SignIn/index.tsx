@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -14,7 +15,7 @@ import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import { Container, Content, Background } from './styles';
+import { AnimationContainer, Background, Container, Content } from './styles';
 
 interface SignInFormData {
   email: string;
@@ -65,32 +66,33 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={logoImg} alt="GoBarber" />
+        <AnimationContainer>
+          <img src={logoImg} alt="GoBarber" />
 
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Login</h1>
-          <Input icon={FiMail} name="email" placeholder="Email" type="text" />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1>Login</h1>
+            <Input icon={FiMail} name="email" placeholder="Email" type="text" />
 
-          <Input
-            icon={FiLock}
-            name="password"
-            placeholder="Password"
-            type="password"
-          />
+            <Input
+              icon={FiLock}
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
 
-          <Button type="submit">Enter</Button>
+            <Button type="submit">Enter</Button>
 
-          <a href="forgot">I forgot my password</a>
-        </Form>
+            <a href="forgot">I forgot my password</a>
+          </Form>
 
-        <a href="login">
-          <FiLogIn />
+          <Link to="signup">
+            <FiLogIn />
           Create a new account
-        </a>
+        </Link>
+        </AnimationContainer>
       </Content>
-
       <Background />
-    </Container>
+    </Container >
   );
 };
 

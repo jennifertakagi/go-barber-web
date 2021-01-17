@@ -37,7 +37,7 @@ const ResetPassword: React.FC = () => {
         const schema = Yup.object().shape({
           password: Yup.string().required('Password is required'),
           password_confirmation: Yup.string().oneOf(
-            [Yup.ref('password'), undefined],
+            [Yup.ref('password')],
             'The password confirmation is not the same as the password',
           ),
         });

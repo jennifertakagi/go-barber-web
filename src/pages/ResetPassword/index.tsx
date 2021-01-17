@@ -1,0 +1,97 @@
+import React, { useCallback, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { FiLock } from 'react-icons/fi';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import * as Yup from 'yup';
+
+import logoImg from '../../assets/logo.svg';
+
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+
+import { useToast } from '../../hooks/toast';
+
+import getValidationErrors from '../../utils/getValidationErrors';
+
+import { AnimationContainer, Background, Container, Content } from './styles';
+
+interface ResetPasswordFormData {
+  password: string;
+  password_confirmation: string;
+}
+
+const ResetPassword: React.FC = () => {
+  const { addToast } = useToast();
+
+  const formRef = useRef<FormHandles>(null);
+  const history = useHistory();
+
+  const handleSubmit = useCallback(
+    async (data: ResetPasswordFormData) => {
+      try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          password: Yup.string().required('Password is required'),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password'), undefined],
+            'The password confirmation is not the same as the password',
+          ),
+        });
+
+        await schema.validate(data, { abortEarly: false });
+
+        history.push('/signin');
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        addToast({
+          description: 'An error occur on password reset, try again.',
+          title: 'Error on password reset',
+          type: 'error',
+        })
+      }
+    },
+    [addToast, history],
+  );
+
+  return (
+    <Container>
+      <Content>
+        <AnimationContainer>
+          <img src={logoImg} alt="GoBarber" />
+
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <h1>Reset Password</h1>
+
+            <Input
+              icon={FiLock}
+              name="password"
+              placeholder="New password"
+              type="password"
+            />
+
+            <Input
+              icon={FiLock}
+              name="password_confirmation"
+              placeholder="Password confirmation"
+              type="password"
+            />
+
+            <Button type="submit">Reset</Button>
+          </Form>
+        </AnimationContainer>
+      </Content>
+      <Background />
+    </Container >
+  );
+};
+
+export default ResetPassword;

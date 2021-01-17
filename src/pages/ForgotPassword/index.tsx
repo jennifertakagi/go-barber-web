@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { FiLogIn, FiMail } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
+import { Form } from '@unform/web'
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
@@ -36,15 +36,13 @@ const ForgotPassword: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('E-mail obrigatório'),
+            .email('Enter a valid email.')
+            .required('Email is required.'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
-
-        // recuperação de senha
 
         await api.post('/password/forgot', {
           email: data.email,
@@ -52,12 +50,9 @@ const ForgotPassword: React.FC = () => {
 
         addToast({
           type: 'success',
-          title: 'E-mail de recuperação enviado',
-          description:
-            'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada',
+          title: 'Password recovery email was send',
+          description: 'We send a email to password recovery, check your email.',
         });
-
-        // history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -69,9 +64,8 @@ const ForgotPassword: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro na recuperação de senha',
-          description:
-            'Ocorreu um erro ao tentar realizar a recuperação de senha, tente novamente.',
+          title: 'Error on password recovery',
+          description: 'An error occur on password recovery, try again.',
         });
       } finally {
         setLoading(false);
@@ -87,18 +81,18 @@ const ForgotPassword: React.FC = () => {
           <img src={logoImg} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Recuperar senha</h1>
+            <h1>Recovery Password</h1>
 
             <Input name="email" icon={FiMail} placeholder="E-mail" />
 
             <Button loading={loading} type="submit">
-              Recuperar
+              Recover
             </Button>
           </Form>
 
           <Link to="/signin">
             <FiLogIn />
-            Voltar ao login
+            Go back to login
           </Link>
         </AnimationContainer>
       </Content>

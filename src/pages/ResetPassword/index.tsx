@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -15,6 +15,7 @@ import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { AnimationContainer, Background, Container, Content } from './styles';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -26,6 +27,7 @@ const ResetPassword: React.FC = () => {
 
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
@@ -42,7 +44,20 @@ const ResetPassword: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
 
-        history.push('/signin');
+        const { password, password_confirmation } = data;
+        const token = location.search.replace('?token=', '');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
+
+        history.push('/');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -56,10 +71,10 @@ const ResetPassword: React.FC = () => {
           description: 'An error occur on password reset, try again.',
           title: 'Error on password reset',
           type: 'error',
-        })
+        });
       }
     },
-    [addToast, history],
+    [addToast, history, location.search],
   );
 
   return (

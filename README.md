@@ -59,7 +59,7 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. If you h
 
 **Install dependencies**
 
-You need to install the dependencies of the project, so **run the above command on root and in each of this folders**:
+You need to install the dependencies of the project, so **run the above command on root folder**:
 
 ```yarn```
 
@@ -74,11 +74,11 @@ Run the following command to start the application in a development environment:
 
 **Question:** What are the technologies used in this project?
 
-**Answer:** The technologies used in this project are [React JS](https://pt-br.reactjs.org/), [Styled Components](https://styled-components.com/), [Polished](https://polished.js.org/), [Unform](https://unform.dev/), [Yup](https://github.com/jquense/yup), [Axios](https://github.com/axios/axios) and [Jest](https://jestjs.io/).
+**Answer:** The technologies used in this project are [React JS](https://pt-br.reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Styled Components](https://styled-components.com/), [Polished](https://polished.js.org/), [Unform](https://unform.dev/), [Yup](https://github.com/jquense/yup), [Axios](https://github.com/axios/axios) and [Jest](https://jestjs.io/).
 
 # :bug: Issues
 
-Feel free to **file a new issue** with a respective title and description on the [What's in your bar](https://github.com/jennifertakagi/go-barber-web/issues) repository. If you already found a solution to your problem, **i would love to review your pull request**! Have a look at our [contribution guidelines](https://github.com/jennifertakagi/go-barber-web/blob/master/CONTRIBUTING.md) to find out about the coding standards.
+Feel free to **file a new issue** with a respective title and description on the [Go Barber Web](https://github.com/jennifertakagi/go-barber-web/issues) repository. If you already found a solution to your problem, **i would love to review your pull request**! Have a look at our [contribution guidelines](https://github.com/jennifertakagi/go-barber-web/blob/master/CONTRIBUTING.md) to find out about the coding standards.
 
 # :tada: Contributing
 
@@ -86,5 +86,5 @@ Check out the [contributing](https://github.com/jennifertakagi/go-barber-web/blo
 
 # :closed_book: License
 
-Released in 2020.
+Released in 2021.
 This project is under the [MIT license](https://github.com/jennifertakagi/go-barber-web/master/LICENSE).

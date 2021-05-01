@@ -118,11 +118,11 @@ Features:
    ```sh
    git clone https://github.com/jennifertakagi/go-barber-web.git
    ```
-2. Install packages on **backend** and **web** folders
+2. Install packages
    ```sh
    yarn | npm install
    ```
-6. Run the local environment
+3. Run the local environment
    ```sh
    yarn start | npm run start
    ```
